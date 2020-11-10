@@ -6,10 +6,22 @@ Simple modifications to the plot.
 
 *Last updated Nov 10, 2020*
 
-
+### Recommended structure
+It is recommended that you use and RProject.
+In which you need at least three folders
+- rmarkdown
+- plots
+- data
 
 ### Libraries required
 
+If you haven't installed the libraries yet, first install them
+```{r}
+library(tidyverse)
+library(here)
+```
+
+If libraries are installed, load them
 ```{r}
 library(tidyverse)
 library(here)
@@ -17,10 +29,10 @@ library(here)
 
 ### data
 - [See the data](https://github.com/orchid00/visualisationsCS/blob/master/data/df_sorted.csv) on GitHub.
-- [Download the data](https://raw.githubusercontent.com/orchid00/visualisationsCS/master/data/df_sorted.csv) (Right click, Save Link As...)
+- [Download the data](https://raw.githubusercontent.com/orchid00/visualisationsCS/master/data/df_sorted.csv) (Right click, Save Link As...) save it in the data folder
 
 ### Materials
-- [download visualisations.Rmd](https://orchid00.github.io/visualisationsCS/visualisations.Rmd)
+- [download visualisations.Rmd](https://orchid00.github.io/visualisationsCS/visualisations.Rmd) save it in the rmarkdown folder
 - [see the code](https://orchid00.github.io/visualisationsCS/visualisations)
 
 ### This site
