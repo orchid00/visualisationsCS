@@ -13,12 +13,15 @@ In which you need at least three folders
 - plots
 - data
 
+### Creat a new Rmarkdown file
+Save the Markdown file in the rmarkdown folder
+
 ### Libraries required
 
 If you haven't installed the libraries yet, first install them
 ```{r}
-library(tidyverse)
-library(here)
+install.packages(tidyverse)
+install.packages(here)
 ```
 
 If libraries are installed, load them
