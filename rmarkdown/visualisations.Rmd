@@ -24,7 +24,7 @@ We are going to follow Cedric Scherer's tutorial on the evolution of a ggplot2. 
 Learn how to use ggplot2 to transform a basic boxplot into a colorful and self-explanatory combination of a jittered dot strip plot and a lollipop plot.
 
 ## Libraries
-```{r libraries, echo = FALSE}
+```{r libraries, message=FALSE}
 library(tidyverse)
 library(here)
 ```
@@ -159,6 +159,7 @@ g +
 ```{r jitter, warning=FALSE}
 g +
     geom_jitter()
+# note this is a random point location, so it always changes
 ```
 
 
