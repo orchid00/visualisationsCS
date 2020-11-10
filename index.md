@@ -12,10 +12,10 @@ library(here)
 ```
 
 ### data
-- [download the data](/master/data/df_sorted.csv)
+- [download the data](visualisationsCS/master/data/df_sorted.csv)
 
 ### Materials
-- [/master/rmarkdown/visualisations.Rmd](../master/rmarkdown/visualisations.Rmd)
+- [/master/rmarkdown/visualisations.Rmd](../visualisationsCS/master/rmarkdown/visualisations.Rmd)
 
 
-- [/master/rmarkdown/visualisations.html](../master/rmarkdown/visualisations.html)
+- [/master/rmarkdown/visualisations.html](../visualisationsCS/master/rmarkdown/visualisations.html)
