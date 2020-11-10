@@ -16,7 +16,7 @@ library(here)
 ```
 
 ### data
-- [download the data](../visualisationsCS/master/data/df_sorted.csv)
+- [download the data](https://github.com/orchid00/visualisationsCS/blob/master/data/df_sorted.csv)
 
 ### Materials
 - [/master/rmarkdown/visualisations.Rmd](../visualisationsCS/master/rmarkdown/visualisations.Rmd)
