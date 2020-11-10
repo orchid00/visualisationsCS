@@ -1,10 +1,21 @@
-## Welcome to GitHub Pages
+## ggplot2 visualisation
 
-You can use the [editor on GitHub](https://github.com/orchid00/visualisationsCS/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-[blob/master/rmarkdown/visualisations.Rmd](../../blob/master/rmarkdown/visualisations.Rmd)
+An adaptation of Cedric Scherer's tutorial [https://cedricscherer.netlify.app/2019/05/17/the-evolution-of-a-ggplot-ep.-1/](https://cedricscherer.netlify.app/2019/05/17/the-evolution-of-a-ggplot-ep.-1/)
 
 
-[blob/master/rmarkdown/visualisations.html](../../blob/master/rmarkdown/visualisations.html)
+
+### Libraries required
+
+```{r}
+library(tidyverse)
+library(here)
+```
+
+### data
+- [download the data](/master/data/df_sorted.csv)
+
+### Materials
+- [/master/rmarkdown/visualisations.Rmd](../master/rmarkdown/visualisations.Rmd)
+
+
+- [/master/rmarkdown/visualisations.html](../master/rmarkdown/visualisations.html)
