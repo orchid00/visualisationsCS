@@ -1,0 +1,278 @@
+---
+title: "ggplot2 visualisations"
+author: "Paula Andrea Martinez"
+date: "10/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.path="../plots/")
+```
+
+## The evolution of a ggplot2
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Acknowledgement
+
+We are going to follow Cedric Scherer's tutorial on the evolution of a ggplot2. All the code can be found in this website [https://cedricscherer.netlify.app](https://cedricscherer.netlify.app/2019/05/17/the-evolution-of-a-ggplot-ep.-1/)
+
+## Aim
+Learn how to use ggplot2 to transform a basic boxplot into a colorful and self-explanatory combination of a jittered dot strip plot and a lollipop plot.
+
+## Libraries
+```{r libraries, echo = FALSE}
+library(tidyverse)
+library(here)
+```
+
+## Load the data
+Data provided by the UNESCO on global student to teacher ratios that was selected as data for the #TidyTuesday challenge 19 of 2019.
+```{r read-data}
+df_sorted <- read_csv(here("data", "df_sorted.csv"))
+```
+```{r check-data}
+glimpse(df_sorted)
+```
+
+
+## The basics of ggplot2
+The ggplot function
+
+```{r basic-canvas}
+ggplot(data = df_sorted)
+```
+```{r add-mappings}
+ggplot(data = df_sorted, 
+       mapping = aes(x = region, y = student_ratio))
+```
+
+
+```{r add-boxplot}
+ggplot(df_sorted, aes(x = region, y = student_ratio)) +
+  geom_boxplot()
+```
+
+```{r check-NAs}
+summary(df_sorted$student_ratio)
+```
+## Sorting data
+```{r re-ordered}
+df_sorted <- 
+  df_sorted %>%
+  mutate(region = fct_reorder(region, -student_ratio_region))
+
+ggplot(df_sorted, aes(x = region, y = student_ratio)) +
+  geom_boxplot()
+```
+
+```{r cord-flip, warning=FALSE}
+ggplot(df_sorted, aes(x = region, y = student_ratio)) +
+  geom_boxplot() +
+  coord_flip()
+```
+
+## Change scale
+
+```{r change-scale, warning=FALSE}
+ggplot(df_sorted, aes(x = region, y = student_ratio)) +
+  geom_boxplot() +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 100))
+```
+
+## Play with themes
+Themes change the look an feel
+```{r change-theme, warning=FALSE}
+ggplot(df_sorted, aes(x = region, y = student_ratio)) +
+  geom_boxplot() +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 100)) +
+  theme_light()
+
+```
+```{r add-colour, warning=FALSE}
+ggplot(df_sorted, aes(x = region, y = student_ratio)) +
+  geom_boxplot(aes(colour = region)) +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 100)) +
+  theme_light()
+
+```
+
+## Setting up new colours
+https://www.datanovia.com/en/blog/ggplot-colors-best-tricks-you-will-love/
+```{r new-customised, warning=FALSE}
+theme_set(theme_light(base_size = 18, base_family = "Courier"))
+col_blind_friendly <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+```
+
+## Customising our canvas
+
+```{r new-plot, warning=FALSE}
+g <- 
+  ggplot(df_sorted, aes(x = region, y = student_ratio, color = region)) +
+    coord_flip() +
+    scale_y_continuous(limits = c(0, 90), expand = c(0.005, 0.005)) +
+    scale_color_manual(values = col_blind_friendly[1:6]) +
+    labs(x = NULL, y = "Student to teacher ratio") +
+  theme(
+      legend.position = "none",
+      axis.text.x = element_text(family = "Curier", size = 12),
+      panel.grid = element_blank()
+    )
+
+g
+```
+
+## Testing geoms
+We can add any geom_<something> to our ggplot-preset g that fits the data (note that until now it is just an empty plot with pretty axes):
+
+
+```{r boxplot, warning=FALSE}
+
+g +
+  geom_boxplot()
+```
+```{r violin, warning=FALSE}
+g +
+    geom_violin(size = 1.5)
+```
+
+```{r line, warning=FALSE}
+
+g +
+  geom_line()
+```
+
+```{r point, warning=FALSE}
+
+g +
+  geom_point()
+```
+
+```{r jitter, warning=FALSE}
+g +
+    geom_jitter()
+```
+
+
+```{r jitter-extra, warning=FALSE}
+set.seed(2019) # talk about randomising
+
+g +
+   geom_jitter(size = 2, alpha = 0.25, width = 0.2)
+```
+
+## Add a lolipop plot to it
+
+First add the mean.
+```{r mean-dot, warning=FALSE}
+set.seed(2019)
+
+g +
+  geom_jitter(size = 2, alpha = 0.25, width = 0.2) +
+  stat_summary(fun = mean, geom = "point", size = 5)
+```
+
+Note that we could also use `geom_point(aes(x = region, y = student_ratio_region), size = 5)`
+```{r mean-region}
+df_sorted %>% 
+  distinct(region, student_ratio_region )
+```
+
+
+```{r mean-region-dot-2, warning=FALSE}
+set.seed(2019)
+
+g +
+  geom_jitter(size = 2, alpha = 0.25, width = 0.2) +
+  geom_point(aes(x = region, y = student_ratio_region), size = 5)
+```
+
+## Add a baseline
+To relate all these points to a baseline, we add a line indicating the worldwide average:
+
+```{r base-line, warning=FALSE}
+world_avg <- 
+  df_sorted %>%
+  summarize(avg = mean(student_ratio, na.rm = TRUE)) %>%
+  pull(avg)
+
+set.seed(2019)
+g +
+  geom_hline(aes(yintercept = world_avg), color = "gray70", size = 0.6) +
+  stat_summary(fun = mean, geom = "point", size = 5) +
+  geom_jitter(size = 2, alpha = 0.25, width = 0.2)
+```
+## Finalising the lolipop
+
+```{r segment, warning=FALSE}
+set.seed(2019)
+g +
+  geom_hline(aes(yintercept = world_avg), color = "gray70", size = 0.6) +
+  stat_summary(fun = mean, geom = "point", size = 5) +
+  geom_jitter(size = 2, alpha = 0.25, width = 0.2) +
+  geom_segment(
+    aes(x = region, xend = region,
+        y = world_avg, yend = student_ratio_region),
+    size = 0.8
+  )
+```
+
+```{r caption, warning=FALSE}
+set.seed(2019)
+
+
+g +
+  geom_hline(aes(yintercept = world_avg), color = "gray70", size = 0.6) +
+  stat_summary(fun = mean, geom = "point", size = 5) +
+  geom_jitter(size = 2, alpha = 0.25, width = 0.2) +
+  geom_segment(
+    aes(x = region, xend = region,
+        y = world_avg, yend = student_ratio_region),
+    size = 0.8
+  ) +
+  labs(caption = "Data: UNESCO Institute for Statistics") +
+  theme(plot.caption = element_text(size = 9, color = "gray50"))
+
+
+```
+
+
+## Bonus
+
+```{r bonus, warning=FALSE}
+set.seed(2019)
+
+df <- data.frame(x1 = 4, x2 = 4.5, y1 = world_avg + 12, y2 = world_avg + 2)
+
+g +
+  geom_hline(aes(yintercept = world_avg), color = "gray70", size = 0.6) +
+  stat_summary(fun = mean, geom = "point", size = 5) +
+  geom_jitter(size = 2, alpha = 0.25, width = 0.2) +
+  geom_segment(
+    aes(x = region, xend = region,
+        y = world_avg, yend = student_ratio_region),
+    size = 0.8
+  ) +
+  annotate("text", x = 4, y = 50, family = "Curier", size = 2.8, 
+    color = "gray20", lineheight = .9,
+    label = glue::glue("Worldwide average:\n{round(world_avg, 1)} students per teacher")
+  ) + 
+  geom_curve(
+    data = df, 
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    arrow = arrow(length = unit(0.07, "inch")), size = 0.4,
+    color = "gray20", curvature = -0.3
+  ) +
+  labs(caption = "Data: UNESCO Institute for Statistics") +
+  theme(plot.caption = element_text(size = 9, color = "gray50"))
+
+
+```
