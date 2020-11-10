@@ -16,9 +16,15 @@ library(here)
 ```
 
 ### data
-- [See the data](https://github.com/orchid00/visualisationsCS/blob/master/data/df_sorted.csv)
-- [Download the data](https://raw.githubusercontent.com/orchid00/visualisationsCS/master/data/df_sorted.csv)
+- [See the data](https://github.com/orchid00/visualisationsCS/blob/master/data/df_sorted.csv) on GitHub.
+- [Download the data](https://raw.githubusercontent.com/orchid00/visualisationsCS/master/data/df_sorted.csv) (Right click, Save Link As...)
 
 ### Materials
 - [download visualisations.Rmd](https://orchid00.github.io/visualisationsCS/visualisations.Rmd)
 - [see the code](https://orchid00.github.io/visualisationsCS/visualisations)
+
+### This site
+[https://orchid00.github.io/visualisationsCS/](https://orchid00.github.io/visualisationsCS/)
+
+### This repo
+[https://github.com/orchid00/visualisationsCS](https://github.com/orchid00/visualisationsCS)
