@@ -16,10 +16,9 @@ library(here)
 ```
 
 ### data
-- [download the data](https://github.com/orchid00/visualisationsCS/blob/master/data/df_sorted.csv)
+- [See the data](https://github.com/orchid00/visualisationsCS/blob/master/data/df_sorted.csv)
+- [Download the data](https://raw.githubusercontent.com/orchid00/visualisationsCS/master/data/df_sorted.csv)
 
 ### Materials
-- [visualisations.Rmd](https://orchid00.github.io/visualisationsCS/visualisations.Rmd)
-
-
-- [html code](https://orchid00.github.io/visualisationsCS/visualisations)
+- [download visualisations.Rmd](https://orchid00.github.io/visualisationsCS/visualisations.Rmd)
+- [see the code](https://orchid00.github.io/visualisationsCS/visualisations)
