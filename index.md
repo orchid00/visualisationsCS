@@ -19,7 +19,7 @@ library(here)
 - [download the data](https://github.com/orchid00/visualisationsCS/blob/master/data/df_sorted.csv)
 
 ### Materials
-- [/master/rmarkdown/visualisations.Rmd](../visualisationsCS/master/rmarkdown/visualisations.Rmd)
+- [visualisations.Rmd](https://orchid00.github.io/visualisationsCS/visualisations.Rmd)
 
 
-- [/master/rmarkdown/visualisations.html](../visualisationsCS/master/rmarkdown/visualisations.html)
+- [html code](https://orchid00.github.io/visualisationsCS/visualisations)
